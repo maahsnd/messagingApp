@@ -6,9 +6,9 @@ import SignUp from '../src/components/Sign-up/SignUp';
 
 function App() {
   const router = createBrowserRouter([
-    { path: '/', element: <Home /> },
     { path: '/log-in', element: <LogIn /> },
-    { path: '/sign-up', element: <SignUp /> }
+    { path: '/sign-up', element: <SignUp /> },
+    { path: '/:username', element: <Home /> }
   ]);
 
   return <RouterProvider router={router} />;
