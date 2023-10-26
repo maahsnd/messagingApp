@@ -3,7 +3,7 @@ import Cookies from 'js-cookie';
 import styles from './sign-up.module.css';
 import { useNavigate } from 'react-router-dom';
 
-function SignUpForm() {
+function SignUp() {
   const [formData, setFormData] = useState({
     username: '',
     password: '',
@@ -91,4 +91,4 @@ function SignUpForm() {
   );
 }
 
-export default SignUpForm;
+export default SignUp;
