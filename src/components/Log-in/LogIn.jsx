@@ -28,7 +28,6 @@ function LogIn() {
         body: JSON.stringify({ username, password })
       });
       const data = await response.json();
-      console.log(data);
       if (response.ok) {
         // Store the JWT token in cookies
         Cookies.set('jwt_token', data.token);
