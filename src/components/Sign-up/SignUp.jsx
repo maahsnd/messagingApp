@@ -28,7 +28,6 @@ function SignUp() {
         body: JSON.stringify(formData)
       });
       const data = await response.json();
-      console.log(data);
       if (response.ok) {
         // Store the JWT token in cookies
         Cookies.set('jwt_token', data.token);
@@ -50,7 +49,7 @@ function SignUp() {
       {errors && (
         <div>
           {errors.map((error) => (
-            <h4>{error}</h4>
+            <h4 key={error.path}>{error.msg}</h4>
           ))}
         </div>
       )}
@@ -76,12 +75,12 @@ function SignUp() {
           />
         </div>
         <div className={styles.formGroup}>
-          <label htmlFor="confirmPassword">Confirm Password</label>
+          <label htmlFor="confirm_password">Confirm Password</label>
           <input
             type="password"
-            name="confirmPassword"
-            id="confirmPassword"
-            value={formData.confirmPassword}
+            name="confirm_password"
+            id="confirm_password"
+            value={formData.confirm_password}
             onChange={handleInputChange}
           />
         </div>
