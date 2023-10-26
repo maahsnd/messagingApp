@@ -2,9 +2,12 @@ import React, { useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
 import styles from './home.module.css';
 import { Link } from 'react-router-dom';
+import User from '../User/User';
+import { useParams } from 'react-router-dom';
 
 function Home() {
   const [authToken, setAuthToken] = useState(null);
+  const { username } = useParams();
 
   useEffect(() => {
     const token = Cookies.get('jwt_token');
@@ -14,12 +17,7 @@ function Home() {
     return;
   }, []);
 
-  if (authToken)
-    return (
-      <div>
-        <p>messages</p>
-      </div>
-    );
+  if (authToken) return <User username={username} />;
   else {
     return (
       <div>
