@@ -8,7 +8,8 @@ function App() {
   const router = createBrowserRouter([
     { path: '/log-in', element: <LogIn /> },
     { path: '/sign-up', element: <SignUp /> },
-    { path: '/:username', element: <Home /> }
+    { path: '/:username', element: <Home /> },
+    { path: '/', element: <Home /> }
   ]);
 
   return <RouterProvider router={router} />;
