@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import Cookies from 'js-cookie';
 import styles from './log-in.module.css';
 import { Link } from 'react-router-dom';
-import LogIn from '../Log-in/LogIn';
-import SignUp from '../Sign-up/SignUp';
 
 function Home() {
   const [authToken, setAuthToken] = useState(null);
