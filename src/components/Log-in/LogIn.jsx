@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 function LogIn() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState();
   const navigate = useNavigate();
 
   const handleUsernameChange = (e) => {
@@ -26,13 +27,15 @@ function LogIn() {
         },
         body: JSON.stringify({ username, password })
       });
+      const data = await response.json();
+      console.log(data);
       if (response.ok) {
-        const data = await response.json();
         // Store the JWT token in cookies
         Cookies.set('jwt_token', data.token);
         navigate('/');
         return;
       } else {
+        setError(data.error);
         // Handle authentication error
         console.error('Authentication failed');
       }
@@ -44,6 +47,7 @@ function LogIn() {
   return (
     <div className={styles.loginForm}>
       <h2>Login</h2>
+      {error && <h4>{error}</h4>}
       <form onSubmit={handleSubmit}>
         <div className={styles.formGroup}>
           <label htmlFor="username">Username</label>
