@@ -35,7 +35,7 @@ function LogIn() {
         navigate('/');
         return;
       } else {
-        setError(data.error);
+        setError(data.msg);
         // Handle authentication error
         console.error('Authentication failed');
       }
