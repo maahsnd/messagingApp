@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
-import styles from './log-in.module.css';
+import styles from './home.module.css';
 import { Link } from 'react-router-dom';
 
 function Home() {
