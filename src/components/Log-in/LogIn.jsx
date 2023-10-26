@@ -32,7 +32,7 @@ function LogIn() {
       if (response.ok) {
         // Store the JWT token in cookies
         Cookies.set('jwt_token', data.token);
-        navigate('/');
+        navigate('/' + data.username);
         return;
       } else {
         setError(data.msg);
