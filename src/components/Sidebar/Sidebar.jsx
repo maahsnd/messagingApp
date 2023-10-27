@@ -2,7 +2,6 @@ import React from 'react';
 import styles from './sidebar.module.css';
 
 function Sidebar({ onNewThreadClick, conversations, onConversationClick }) {
-  console.log(conversations);
   return (
     <div className={styles.sidebar}>
       <button onClick={onNewThreadClick}>Create New Thread</button>
