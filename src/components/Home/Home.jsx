@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
 import styles from './home.module.css';
 import { Link } from 'react-router-dom';
-import User from '../User/User';
 import { useParams } from 'react-router-dom';
+import Messages from '../Messages/Messages';
 
 function Home() {
   const [authToken, setAuthToken] = useState(null);
@@ -17,7 +17,13 @@ function Home() {
     return;
   }, []);
 
-  if (authToken) return <User username={username} />;
+  if (authToken)
+    return (
+      <>
+        <Link to={`/${username}/edit`}>{username}</Link>
+        <Messages />
+      </>
+    );
   else {
     return (
       <div>
