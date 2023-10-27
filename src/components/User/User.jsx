@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
 import styles from './user.module.css';
 import { useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
-function User(props) {
+function User() {
   const [user, setUser] = useState({ username: '' });
   const [errors, setErrors] = useState(null);
   const navigate = useNavigate();
-  const { username } = props;
+  const { username } = useParams();
 
   useEffect(() => {
     const token = Cookies.get('jwt_token');
@@ -49,7 +50,7 @@ function User(props) {
       const data = await response.json();
       if (response.ok) {
         //navigate to new username page
-        navigate('/' + data.username);
+        navigate('/' + data.username + '/edit');
         return;
       } else {
         setErrors(data.errors);
