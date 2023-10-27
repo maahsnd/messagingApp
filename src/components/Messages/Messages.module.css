@@ -1,0 +1,10 @@
+.messagesContainer {
+  display: flex;
+  align-items: flex-start;
+  padding: 20px;
+  background-color: #f2f2f2;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Adjust styles for sidebar and thread as needed */
