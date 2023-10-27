@@ -16,7 +16,7 @@ function Messages() {
         onConversationSelect={handleConversationSelect}
         conversations={conversations}
       />
-      <Thread selectedConversation={selectedConversation} />
+      <Thread newThread={[{username:'j'}, {username: 'k'}]} />
     </div>
   );
 }
