@@ -1,0 +1,14 @@
+.thread {
+  flex-grow: 1;
+  padding: 20px;
+  background-color: #fff;
+  border-left: 1px solid #ccc;
+}
+
+.placeholder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  color: #999;
+}
