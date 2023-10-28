@@ -1,9 +1,30 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import styles from './thread.module.css';
+import Cookies from 'js-cookie';
 
-function Thread({ newThreadContacts, newThreadForm, selectedThread }) {
+function Thread({  newThreadForm, selectedThread }) {
   const [recipients, setRecipients] = useState([]);
-  const [message, setMessage] = useState(null)
+  const [message, setMessage] = useState('')
+  const [contacts, setContacts] = useState([]);
+
+  useEffect(()=> {
+    const fetchContacts = async() => {
+      const token = Cookies.get('jwt_token');
+      const response = await fetch(`http://localhost:3000/users/`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + token
+        }
+      });
+      if (!response.ok) {
+        console.error('Error fetching contacts');
+      }
+      const data = await response.json();
+      setContacts(data.users);}
+    fetchContacts()
+  },[])
+
   const selectRecipient = (e) => {
     e.preventDefault()
     setRecipients([...recipients, e.target.value])
@@ -29,11 +50,11 @@ function Thread({ newThreadContacts, newThreadForm, selectedThread }) {
         <form >
           <div className={styles.contactField}>
             <label htmlFor="contactSelect">Select recipient/s</label>
-            <select name="contactSelect" id="contactSelect" onChange={selectRecipient}>
-              {newThreadContacts.map((user) => (
+        <select name="contactSelect" id="contactSelect" onChange={selectRecipient}>
+              {contacts.map((user) => (
                 <option value={user.username} key={user.username}>{user.username}</option>
               ))}
-            </select>
+            </select> 
           </div>
           <div className={styles.recipientsContainer}>
             <h4>Recipients:</h4>
