@@ -1,7 +1,12 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styles from './thread.module.css';
 
 function Thread({ newThreadContacts, newThreadForm, selectedThread }) {
+  const [recipients, setRecipients] = useState([]);
+  const selectRecipient = (e) => {
+    e.preventDefault()
+    setRecipients([...recipients, e.target.value])
+  } 
   return (
     <div className={styles.thread}>
       {selectedThread && 
@@ -14,7 +19,7 @@ function Thread({ newThreadContacts, newThreadForm, selectedThread }) {
         <form >
           <div className={styles.contactField}>
             <label htmlFor="contactSelect">Select recipient/s</label>
-            <select name="contactSelect" id="contactSelect">
+            <select name="contactSelect" id="contactSelect" onSelect={selectRecipient}>
               {newThreadContacts.map((user) => (
                 <option value={user.username} key={user.username}>{user.username}</option>
               ))}
