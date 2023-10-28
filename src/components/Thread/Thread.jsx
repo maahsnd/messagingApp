@@ -15,7 +15,7 @@ function Thread({ selectedThread, newThread }) {
           <div className={styles.contactField}>
             <label htmlFor="contactSelect">Select recipient/s</label>
             <select name="contactSelect" id="contactSelect">
-              {newThread.map((user) => (
+              {newThreadContacts.map((user) => (
                 <option value={user.username} key={user.username}>{user.username}</option>
               ))}
             </select>
