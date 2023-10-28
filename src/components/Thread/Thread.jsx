@@ -1,12 +1,15 @@
 import React, {useState, useEffect} from 'react';
 import styles from './thread.module.css';
 import Cookies from 'js-cookie';
+import { useParams } from 'react-router-dom';
 
 function Thread({  newThreadForm, selectedThread }) {
   const [recipients, setRecipients] = useState([]);
   const [message, setMessage] = useState('')
   const [contacts, setContacts] = useState([]);
+  const {username} = useParams()
 
+  //fetch contacts
   useEffect(()=> {
     const fetchContacts = async() => {
       const token = Cookies.get('jwt_token');
@@ -24,6 +27,32 @@ function Thread({  newThreadForm, selectedThread }) {
       setContacts(data);}
     fetchContacts()
   },[])
+
+  //submit new thread & message
+  const submitNewThread = async (e) => {
+    e.preventDefault()
+    const token = Cookies.get('jwt_token');
+    const userId = Cookies.get('userId')
+    const recipientIds = recipients.map((recipient) => recipient = recipient._id)
+    const body = {
+      text: message,
+      from: userId,
+      to: recipientIds
+    }
+    console.log(body)
+    const response = await fetch(`http://localhost:3000/${username}/threads/messages`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + token
+        },
+        body: JSON.stringify(body)
+      });
+      if (!response.ok) {
+        console.error('Error sending new message');
+      }
+      const data = await response.json();
+  }
 
   const selectRecipient = (e) => {
     e.preventDefault()
@@ -47,7 +76,7 @@ function Thread({  newThreadForm, selectedThread }) {
     {/* NEW THREAD*/}
       {newThreadForm && 
       <div className={styles.threadForm}>
-        <form >
+        <form onSubmit={submitNewThread}>
           <div className={styles.contactField}>
             <label htmlFor="contactSelect">Select recipient/s</label>
         <select name="contactSelect" id="contactSelect" onChange={selectRecipient}>
@@ -69,7 +98,7 @@ function Thread({  newThreadForm, selectedThread }) {
             <textarea value={message} onChange={messageChange} name="messageText" id="messageText" cols="30" rows="10"></textarea>
           </div>
           <div className={styles.submitButton}>
-                  <button>Send</button>
+                  <button type='submit'>Send</button>
           </div>
         </form>
       </div>}
