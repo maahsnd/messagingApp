@@ -5,17 +5,17 @@ import Thread from '../Thread/Thread';
 
 //messages renders and contains sidebar and thread
 function Messages() {
-  const [selectedConversation, setSelectedConversation] = useState(null);
-  const conversations = ['hey', 'hi', 'hoo'];
-  const handleConversationSelect = (conversation) => {
-    setSelectedConversation(conversation);
+  const [selectedThread, setSelectedThread] = useState(null);
+  const dummyThread = ['hey', 'hi', 'hoo'];
+  const handleThreadSelect = (thread) => {
+    setSelectedThread(thread);
   };
 
   return (
     <div className={styles.messagesContainer}>
       <Sidebar
-        onConversationSelect={handleConversationSelect}
-        conversations={conversations}
+        onConversationSelect={handleThreadSelect}
+        threads={dummyThread}
       />
       <Thread newThread={[{username:'j'}, {username: 'k'}]} />
     </div>

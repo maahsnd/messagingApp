@@ -1,16 +1,16 @@
 import React from 'react';
 import styles from './sidebar.module.css';
 
-function Sidebar({ onNewThreadClick, conversations, onConversationClick }) {
+function Sidebar({ onNewThreadClick, threads, onThreadClick }) {
   return (
     <div className={styles.sidebar}>
       <button onClick={onNewThreadClick}>Create New Thread</button>
-      {conversations.map((conversation) => (
+      {threads.map((thread) => (
         <button
-          key={conversation.id}
-          onClick={() => onConversationClick(conversation)}
+          key={thread.id}
+          onClick={() => onThreadClick(thread)}
         >
-          {conversation.name}
+          {thread.name}
         </button>
       ))}
     </div>
