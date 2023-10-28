@@ -21,7 +21,7 @@ function Thread({  newThreadForm, selectedThread }) {
         console.error('Error fetching contacts');
       }
       const data = await response.json();
-      setContacts(data.users);}
+      setContacts(data);}
     fetchContacts()
   },[])
 
