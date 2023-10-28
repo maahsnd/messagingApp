@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './thread.module.css';
 
-function Thread({ selectedThread, newThread }) {
+function Thread({ newThreadContacts, newThreadForm, selectedThread }) {
   return (
     <div className={styles.thread}>
       {selectedThread && 
@@ -9,7 +9,7 @@ function Thread({ selectedThread, newThread }) {
           {/* Display messages for the selected thread */}
         </div>
        }
-      {newThread && 
+      {newThreadForm && 
       <div className={styles.threadForm}>
         <form >
           <div className={styles.contactField}>

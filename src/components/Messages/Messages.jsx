@@ -5,8 +5,8 @@ import Thread from '../Thread/Thread';
 
 //messages renders and contains sidebar and thread
 function Messages() {
-  const [selectedThread, setSelectedThread] = useState(null);
-  const [newThreadForm, setNewThreadForm] = useState(null)
+  const [selectedThread, setSelectedThread] = useState(false);
+  const [newThreadForm, setNewThreadForm] = useState(false)
   const dummyThread = ['hey', 'hi', 'hoo'];
   const handleThreadSelect = (thread) => {
     setSelectedThread(thread);
@@ -24,7 +24,7 @@ function Messages() {
         
 
       />
-      <Thread newThreadForm={newThreadForm} newThreadContacts={[{username:'j'}, {username: 'k'}]} />
+      <Thread newThreadForm={newThreadForm} newThreadContacts={[{username:'j'}, {username: 'k'}]} selectedThread={selectedThread} />
     </div>
   );
 }
