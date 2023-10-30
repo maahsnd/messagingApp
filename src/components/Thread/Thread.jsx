@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styles from './thread.module.css';
 import Cookies from 'js-cookie';
 import { useParams } from 'react-router-dom';
+import dayjs from 'dayjs';
 
 function Thread({ newThreadForm, selectedThread }) {
   const [recipients, setRecipients] = useState([]);
@@ -80,10 +81,10 @@ function Thread({ newThreadForm, selectedThread }) {
     <div className={styles.thread}>
       {selectedThread &&
         selectedThread.messages.map((message) => (
-          <div className={styles.messages}>
+          <div className={styles.messages} key={message._id}>
             <p>{message.from.username}</p>
             <p>{message.text}</p>
-            <p>{message.timestamp}</p>
+            <p>{dayjs(message.timestamp).format('MM-DD-YY HH:mm a')}</p>
           </div>
         ))}
       {/* NEW THREAD*/}
