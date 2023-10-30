@@ -77,16 +77,18 @@ function Thread({ newThreadForm, selectedThread, handleThreadSelect }) {
     setRecipients(filtered);
   };
   return (
-    /* SELECTED THREAD*/
-    <div className={styles.thread}>
-      {selectedThread &&
-        selectedThread.messages.map((message) => (
-          <div className={styles.messages} key={message._id}>
-            <p>{message.from.username}</p>
-            <p>{message.text}</p>
-            <p>{dayjs(message.timestamp).format('MM-DD-YY HH:mm a')}</p>
-          </div>
-        ))}
+    <>
+      {selectedThread && (
+        <div className={styles.thread}>
+          {selectedThread.messages.map((message) => (
+            <div className={styles.messages} key={message._id}>
+              <p>{message.from.username}</p>
+              <p>{message.text}</p>
+              <p>{dayjs(message.timestamp).format('MM-DD-YY HH:mm a')}</p>
+            </div>
+          ))}
+        </div>
+      )}
       {/* NEW THREAD*/}
       {newThreadForm && (
         <div className={styles.threadForm}>
@@ -134,7 +136,7 @@ function Thread({ newThreadForm, selectedThread, handleThreadSelect }) {
           </form>
         </div>
       )}
-    </div>
+    </>
   );
 }
 
