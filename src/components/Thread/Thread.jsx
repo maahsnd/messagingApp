@@ -4,7 +4,7 @@ import Cookies from 'js-cookie';
 import { useParams } from 'react-router-dom';
 import dayjs from 'dayjs';
 
-function Thread({ newThreadForm, selectedThread }) {
+function Thread({ newThreadForm, selectedThread, handleThreadSelect }) {
   const [recipients, setRecipients] = useState([]);
   const [message, setMessage] = useState('');
   const [contacts, setContacts] = useState([]);
@@ -58,7 +58,7 @@ function Thread({ newThreadForm, selectedThread }) {
       console.error('Error sending new message');
     }
     const data = await response.json();
-    console.log(data);
+    handleThreadSelect(data);
   };
 
   const selectRecipient = (e) => {

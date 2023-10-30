@@ -58,7 +58,11 @@ function Messages() {
         threads={threads}
         handleNewThreadClick={handleNewThreadClick}
       />
-      <Thread newThreadForm={newThreadForm} selectedThread={selectedThread} />
+      <Thread
+        handleThreadSelect={handleThreadSelect}
+        newThreadForm={newThreadForm}
+        selectedThread={selectedThread}
+      />
     </div>
   );
 }
