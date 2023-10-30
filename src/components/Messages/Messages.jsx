@@ -3,12 +3,15 @@ import Cookies from 'js-cookie';
 import styles from './Messages.module.css';
 import Sidebar from '../Sidebar/Sidebar';
 import Thread from '../Thread/Thread';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 
 //messages renders and contains sidebar and thread
-function Messages() {
+function Messages(props) {
   const [selectedThread, setSelectedThread] = useState(false);
   const [newThreadForm, setNewThreadForm] = useState(false);
   const [threads, setThreads] = useState([]);
+  const { username } = useParams();
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchThreads = async () => {
       try {
@@ -50,9 +53,14 @@ function Messages() {
     setNewThreadForm(true);
     setSelectedThread(false);
   };
-
+  const logOut = () => {
+    Cookies.remove('jwt_token', { path: '' });
+    props.setAuthToken();
+  };
   return (
     <div className={styles.messagesContainer}>
+      <Link to={`/${username}/edit`}>{username}</Link>
+      <button onClick={logOut}>Log Out</button>
       <Sidebar
         onThreadClick={handleThreadSelect}
         threads={threads}
