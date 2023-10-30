@@ -57,6 +57,7 @@ function Messages(props) {
   const logOut = () => {
     Cookies.remove('jwt_token', { path: '' });
     props.setAuthToken();
+    navigate('/');
   };
   return (
     <div className={styles.messagesContainer}>
