@@ -116,22 +116,25 @@ function Thread({ newThreadForm, selectedThread, handleThreadSelect }) {
               <p>{dayjs(message.timestamp).format('MM-DD-YY HH:mm a')}</p>
             </div>
           ))}
-
-          <form onSubmit={newMessage}>
-            <textarea
-              className={styles.newMsg}
-              value={message}
-              onChange={messageChange}
-              name="messageText"
-              id="messageText"
-              cols="30"
-              rows="10"
-            ></textarea>
-            <div className={styles.submitButton}>
-              <button type="submit">Send</button>
-            </div>
-          </form>
         </div>
+      )}
+      {selectedThread && (
+        <form onSubmit={newMessage} className={styles.newMsgContainer}>
+          <textarea
+            className={styles.newMsg}
+            value={message}
+            onChange={messageChange}
+            name="messageText"
+            id="messageText"
+            cols="30"
+            rows="10"
+          ></textarea>
+          <div>
+            <button className={styles.newMsgButton} type="submit">
+              Send
+            </button>
+          </div>
+        </form>
       )}
       {/* NEW THREAD*/}
       {newThreadForm && (
