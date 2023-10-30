@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import styles from './Messages.module.css';
 import Sidebar from '../Sidebar/Sidebar';
@@ -45,9 +44,11 @@ function Messages() {
   }, []);
   const handleThreadSelect = (thread) => {
     setSelectedThread(thread);
+    setNewThreadForm(false);
   };
   const handleNewThreadClick = () => {
     setNewThreadForm(true);
+    setSelectedThread(false);
   };
 
   return (
