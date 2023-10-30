@@ -61,6 +61,35 @@ function Thread({ newThreadForm, selectedThread, handleThreadSelect }) {
     handleThreadSelect(data);
   };
 
+  const newMessage = async (e) => {
+    e.preventDefault();
+    const token = Cookies.get('jwt_token');
+    const userId = Cookies.get('user_id');
+    const body = {
+      text: message,
+      from: userId,
+      to: selectedThread.users,
+      thread: selectedThread._id
+    };
+    const response = await fetch(
+      `http://localhost:3000/users/${username}/threads/messages`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + token
+        },
+        body: JSON.stringify(body)
+      }
+    );
+    if (!response.ok) {
+      console.error('Error sending new message');
+    }
+    const data = await response.json();
+    handleThreadSelect(data);
+    setMessage('');
+  };
+
   const selectRecipient = (e) => {
     const selectedRecipient = contacts.find(
       (contact) => contact.username === e.target.value
@@ -77,7 +106,7 @@ function Thread({ newThreadForm, selectedThread, handleThreadSelect }) {
     setRecipients(filtered);
   };
   return (
-    <>
+    <div className={styles.threadContainer}>
       {selectedThread && (
         <div className={styles.thread}>
           {selectedThread.messages.map((message) => (
@@ -87,6 +116,21 @@ function Thread({ newThreadForm, selectedThread, handleThreadSelect }) {
               <p>{dayjs(message.timestamp).format('MM-DD-YY HH:mm a')}</p>
             </div>
           ))}
+
+          <form onSubmit={newMessage}>
+            <textarea
+              className={styles.newMsg}
+              value={message}
+              onChange={messageChange}
+              name="messageText"
+              id="messageText"
+              cols="30"
+              rows="10"
+            ></textarea>
+            <div className={styles.submitButton}>
+              <button type="submit">Send</button>
+            </div>
+          </form>
         </div>
       )}
       {/* NEW THREAD*/}
@@ -136,7 +180,7 @@ function Thread({ newThreadForm, selectedThread, handleThreadSelect }) {
           </form>
         </div>
       )}
-    </>
+    </div>
   );
 }
 

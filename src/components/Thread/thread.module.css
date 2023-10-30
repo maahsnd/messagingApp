@@ -1,8 +1,8 @@
 .thread {
-  flex-grow: 1;
-  padding: 20px;
-  background-color: #fff;
-  border-left: 1px solid #ccc;
+  background-color: lightblue;
+  width: 95%;
+  padding: 2%;
+  height: fit-content;
 }
 
 .placeholder {
@@ -10,7 +10,7 @@
   justify-content: center;
   align-items: center;
   height: 100%;
-  color: #999;
+  color: black;
 }
 
 .recipient {
@@ -18,4 +18,18 @@
   border: rgba(0, 0, 0, 0.475) solid 2px;
   border-radius: 4px;
   padding: 2px;
+}
+.threadContainer {
+  background-color: white;
+  width: 100%;
+  display: flex;
+}
+
+.messages {
+  padding: 2px;
+  margin: 2px;
+  border: 2px black solid;
+}
+.newMsg {
+  align-self: flex-end;
 }

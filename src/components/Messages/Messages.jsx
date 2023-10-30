@@ -11,6 +11,7 @@ function Messages(props) {
   const [newThreadForm, setNewThreadForm] = useState(false);
   const [threads, setThreads] = useState([]);
   const { username } = useParams();
+
   const navigate = useNavigate();
   useEffect(() => {
     const fetchThreads = async () => {
@@ -33,7 +34,7 @@ function Messages(props) {
         const data = await response.json();
         if (response.ok) {
           setThreads(data);
-
+          setUpdate(null);
           return;
         } else {
           // Handle authentication error
@@ -59,18 +60,27 @@ function Messages(props) {
   };
   return (
     <div className={styles.messagesContainer}>
-      <Link to={`/${username}/edit`}>{username}</Link>
-      <button onClick={logOut}>Log Out</button>
-      <Sidebar
-        onThreadClick={handleThreadSelect}
-        threads={threads}
-        handleNewThreadClick={handleNewThreadClick}
-      />
-      <Thread
-        handleThreadSelect={handleThreadSelect}
-        newThreadForm={newThreadForm}
-        selectedThread={selectedThread}
-      />
+      <header>
+        <button className={styles.dashBtn}>
+          {' '}
+          <Link to={`/${username}/edit`}>{username}</Link>
+        </button>
+        <button className={styles.dashBtn} onClick={logOut}>
+          Log Out
+        </button>
+      </header>
+      <div className={styles.content}>
+        <Sidebar
+          onThreadClick={handleThreadSelect}
+          threads={threads}
+          handleNewThreadClick={handleNewThreadClick}
+        />
+        <Thread
+          handleThreadSelect={handleThreadSelect}
+          newThreadForm={newThreadForm}
+          selectedThread={selectedThread}
+        />
+      </div>
     </div>
   );
 }

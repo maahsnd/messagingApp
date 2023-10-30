@@ -1,20 +1,30 @@
 .sidebar {
-  width: 200px;
+  width: 15rem;
   background-color: #f2f2f2;
-  padding: 20px;
   display: flex;
   flex-direction: column;
 }
 
 button {
-  margin: 10px 0;
+  border: pink solid 2px;
+  height: 4rem;
+  width: 15rem;
   padding: 10px;
   border: none;
   background-color: #007bff;
-  color: #fff;
+  color: black;
   cursor: pointer;
+  border: pink solid 2px;
 }
 
 button:hover {
   background-color: #0056b3;
+}
+
+.newThread {
+  background-color: lightblue;
+}
+
+.thread {
+  background-color: beige;
 }
