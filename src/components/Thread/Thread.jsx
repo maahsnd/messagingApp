@@ -78,11 +78,14 @@ function Thread({ newThreadForm, selectedThread }) {
   return (
     /* SELECTED THREAD*/
     <div className={styles.thread}>
-      {selectedThread && (
-        <div className={styles.messages}>
-          {/* Display messages for the selected thread */}
-        </div>
-      )}
+      {selectedThread &&
+        selectedThread.messages.map((message) => (
+          <div className={styles.messages}>
+            <p>{message.from.username}</p>
+            <p>{message.text}</p>
+            <p>{message.timestamp}</p>
+          </div>
+        ))}
       {/* NEW THREAD*/}
       {newThreadForm && (
         <div className={styles.threadForm}>
