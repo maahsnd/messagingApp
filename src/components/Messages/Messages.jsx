@@ -53,7 +53,7 @@ function Messages() {
   return (
     <div className={styles.messagesContainer}>
       <Sidebar
-        onConversationSelect={handleThreadSelect}
+        onThreadClick={handleThreadSelect}
         threads={threads}
         handleNewThreadClick={handleNewThreadClick}
       />
