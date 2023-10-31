@@ -27,10 +27,17 @@
   justify-content: center;
 }
 
-.messages {
+.sentMsg,
+.receivedMsg {
   padding: 2px;
   margin: 2px;
   border: 2px black solid;
+}
+.receivedMsg {
+  background-color: pink;
+}
+.sentMsg {
+  background-color: lightblue;
 }
 .newMsgContainer {
   margin-top: auto;

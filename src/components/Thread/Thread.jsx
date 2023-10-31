@@ -9,7 +9,7 @@ function Thread({ newThreadForm, selectedThread, handleThreadSelect }) {
   const [message, setMessage] = useState('');
   const [contacts, setContacts] = useState([]);
   const { username } = useParams();
-
+  const userId = Cookies.get('user_id');
   //fetch contacts
   useEffect(() => {
     const fetchContacts = async () => {
@@ -34,7 +34,7 @@ function Thread({ newThreadForm, selectedThread, handleThreadSelect }) {
   const submitNewThread = async (e) => {
     e.preventDefault();
     const token = Cookies.get('jwt_token');
-    const userId = Cookies.get('user_id');
+
     const recipientIds = recipients.map(
       (recipient) => (recipient = recipient._id)
     );
@@ -110,7 +110,14 @@ function Thread({ newThreadForm, selectedThread, handleThreadSelect }) {
       {selectedThread && (
         <div className={styles.thread}>
           {selectedThread.messages.map((message) => (
-            <div className={styles.messages} key={message._id}>
+            <div
+              className={
+                message.from._id === userId
+                  ? styles.sentMsg
+                  : styles.receivedMsg
+              }
+              key={message._id}
+            >
               <p>{message.from.username}</p>
               <p>{message.text}</p>
               <p>{dayjs(message.timestamp).format('MM-DD-YY HH:mm a')}</p>
