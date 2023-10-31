@@ -2,9 +2,6 @@ import React from 'react';
 import styles from './sidebar.module.css';
 
 function Sidebar({ handleNewThreadClick, threads, onThreadClick }) {
-  if (!threads) {
-    return <></>;
-  }
   return (
     <div className={styles.sidebar}>
       <button className={styles.newThread} onClick={handleNewThreadClick}>

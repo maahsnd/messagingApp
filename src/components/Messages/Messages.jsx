@@ -32,11 +32,14 @@ function Messages(props) {
           console.error('Error fetching threads');
         }
         const data = await response.json();
+        if (!Array.isArray(data)) {
+          console.error(data.msg);
+        }
         if (response.ok) {
           setThreads(data);
-          setUpdate(null);
           return;
         } else {
+          Cookies.remove('jwt_token', { path: '' });
           // Handle authentication error
           console.error('Authentication failed');
         }
