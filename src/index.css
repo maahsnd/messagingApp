@@ -1,0 +1,12 @@
+body {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(240, 248, 255, 0.367);
+}
+
+body > * {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}

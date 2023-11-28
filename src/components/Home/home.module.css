@@ -1,0 +1,20 @@
+.homeContainer {
+    display: flex;
+    flex-direction: column;
+    background-color: lightblue;
+    align-items: center;
+    padding: 5rem;
+    border-radius: 20px;
+}
+
+.btn {
+    background-color: pink;
+    border-radius: 20px;
+    border: 2px solid rgba(240, 248, 255, 0.367);
+    padding: 7px;
+    text-decoration: none;
+  }
+  
+  .btn:hover {
+    background-color: rgba(240, 248, 255, 0.367);
+  }

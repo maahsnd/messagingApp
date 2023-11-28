@@ -25,9 +25,9 @@ function Home() {
   else {
     return (
       <div className={styles.homeContainer}> 
-        <Link to="/log-in">Log in</Link>
+        <Link to="/log-in" className={styles.btn}>Log in</Link>
         <p>or</p>
-        <Link to="/sign-up">Sign up</Link>
+        <Link to="/sign-up" className={styles.btn}>Sign up</Link>
       </div>
     );
   }
