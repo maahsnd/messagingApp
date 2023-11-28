@@ -1,7 +1,9 @@
 import React from 'react';
 import styles from './sidebar.module.css';
+import { useParams } from 'react-router-dom';
 
 function Sidebar({ handleNewThreadClick, threads, onThreadClick }) {
+  const {username} = useParams()
   return (
     <div className={styles.sidebar}>
       <button className={styles.newThread} onClick={handleNewThreadClick}>
@@ -14,7 +16,10 @@ function Sidebar({ handleNewThreadClick, threads, onThreadClick }) {
           onClick={() => onThreadClick(thread)}
         >
           {thread.users.map((user, index) => {
-            if (index != 0) {
+            if (user.username === username) {
+              return
+            }
+            if (index != 0 && thread.users[index-1].username != username) {
               return ', ' + user.username;
             }
             return `${user.username}`;
