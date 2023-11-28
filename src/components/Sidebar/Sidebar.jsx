@@ -7,7 +7,7 @@ function Sidebar({ handleNewThreadClick, threads, onThreadClick }) {
       <button className={styles.newThread} onClick={handleNewThreadClick}>
         Create New Thread
       </button>
-      {threads.map((thread) => (
+      {threads.length > 0 && threads.map((thread) => (
         <button
           className={styles.thread}
           key={thread.id}
