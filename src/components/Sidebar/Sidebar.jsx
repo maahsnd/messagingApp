@@ -10,7 +10,7 @@ function Sidebar({ handleNewThreadClick, threads, onThreadClick }) {
       {threads.length > 0 && threads.map((thread) => (
         <button
           className={styles.thread}
-          key={thread.id}
+          key={thread._id}
           onClick={() => onThreadClick(thread)}
         >
           {thread.users.map((user, index) => {
