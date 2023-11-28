@@ -7,23 +7,26 @@ import Messages from '../Messages/Messages';
 
 function Home() {
   const [authToken, setAuthToken] = useState(null);
+  const [guest, setGuest] = useState(null)
   const navigate = useNavigate();
   const guestUser = async (e) => {
     e.preventDefault()
     try {
+      const username = 'guest-user'
       const response = await fetch('http://localhost:3000/log-in', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ username: 'guest-user', password: 'guest%User1' })
+        body: JSON.stringify({ username, password: 'guest%User1' })
       });
       const data = await response.json();
       if (response.ok) {
         // Store the JWT token in cookies
         Cookies.set('jwt_token', data.token);
         Cookies.set('user_id', data.userId);
-        navigate('/guest-user');
+        setGuest(true)
+        navigate('/' + username);
         return;
       } else {
         // Handle authentication error
@@ -40,7 +43,7 @@ function Home() {
       setAuthToken(token);
     }
     return;
-  }, []);
+  }, [guest]);
 
   if (authToken)
     return (
