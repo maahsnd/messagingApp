@@ -16,9 +16,9 @@
   height: 100vh;
 }
 
-
 .dashBtn {
-  background-color: aquamarine;
+  border: black;
+  background-color: white;
   height: 2rem;
   width: 6rem;
   min-width: fit-content;
