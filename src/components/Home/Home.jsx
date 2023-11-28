@@ -41,6 +41,7 @@ function Home() {
     const token = Cookies.get('jwt_token');
     if (token) {
       setAuthToken(token);
+      setGuest(null)
     }
     return;
   }, [guest]);
