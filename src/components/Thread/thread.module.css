@@ -1,8 +1,10 @@
 .thread {
   background-color: lightblue;
-  width: 95%;
+  width: 96%;
   padding: 2%;
-  height: fit-content;
+  height: 96%;
+  overflow-y: scroll;
+  border-radius: 5px;
 }
 
 .placeholder {
@@ -26,6 +28,7 @@
   flex-direction: column;
   justify-content: center;
   border-radius: 5px;
+  height: 100%;
 }
 
 .sentMsg,
