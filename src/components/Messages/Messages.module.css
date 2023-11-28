@@ -4,8 +4,8 @@
   align-items: flex-start;
   background-color: rgba(240, 248, 255, 0.367);
   height: calc(100% - 1rem);
-  width: calc(100% - 2rem);
-  padding: .5rem 1rem .5rem 1rem;
+  width: calc(100% - 3rem);
+  padding: .5rem 1rem .5rem 2rem;
   overflow: hidden;
   border-radius: 5px;
   border: 1px solid rgba(0, 0, 0, 0.4);

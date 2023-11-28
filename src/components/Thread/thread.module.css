@@ -1,10 +1,10 @@
 .thread {
-  background-color: lightblue;
   width: 96%;
   padding: 2%;
   height: 96%;
   overflow-y: scroll;
   border-radius: 5px;
+  background-color: rgba(240, 248, 255, 0.367);
 }
 
 .placeholder {
@@ -22,19 +22,21 @@
   padding: 2px;
 }
 .threadContainer {
-  background-color: white;
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   border-radius: 5px;
   height: 100%;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
 }
 
 .messageWrap {
   display: flex;
   align-items: center;
   position: relative;
+  border-radius: 0px;;
 }
 
 .senderIcon {
@@ -64,7 +66,7 @@ align-items: center;
 .sentMsg {
   background-color: rgba(4, 4, 199, 0.73);
   color: white;
-  margin-left: auto
+  margin-left: auto;
 }
 
 .msgTxt {
@@ -72,15 +74,30 @@ align-items: center;
 }
 
 .newMsgContainer {
+  height: 150px;
   margin-top: auto;
+  margin-bottom: 10px;;
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: rgba(240, 248, 255, 0.37);
 }
 .newMsg {
-  width: 95%;
+  width: 90%;
+  border-radius: 15px;
+  border-color: rgb(227, 224, 224);
+  resize: none;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+padding: 10px;
 }
 
 .newMsgButton {
-  height: 2.5rem;
+  height: min-content;
+  margin-bottom: 25px;
+  margin-top: 2px;
+  padding: 4px 6px;
+  width: min-content;
+  color: white;
+  border: none;
+  background-color: rgba(4, 4, 199, 0.73);
 }
