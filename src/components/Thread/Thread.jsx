@@ -116,8 +116,9 @@ function Thread({ newThreadForm, selectedThread, handleThreadSelect }) {
             <Tooltip
               title={dayjs(message.timestamp).format('MM-DD-YY HH:mm a')}
               placement='left'
+              key={message._id}
             >
-              <div className={styles.messageWrap} key={message._id}>
+              <div className={styles.messageWrap} >
                 {/* show user icon in group convos for recieved messages */}
                 {selectedThread.users.length > 2 &&
                   message.from._id !== userId && (
@@ -131,7 +132,6 @@ function Thread({ newThreadForm, selectedThread, handleThreadSelect }) {
                       ? styles.sentMsg
                       : styles.receivedMsg
                   }
-                  key={message._id}
                   value={message}
                 >
                   <p className={styles.msgTxt}>{message.text}</p>
