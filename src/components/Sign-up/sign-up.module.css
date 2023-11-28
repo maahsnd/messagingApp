@@ -1,13 +1,16 @@
 .signUpForm {
   border: 1px solid #ccc;
-  padding: 20px;
+  padding: 5rem;
   max-width: 300px;
   margin: 0 auto;
+  background-color: lightblue;
+  border-radius: 20px;
 }
 
 .signUpForm h2 {
   font-size: 24px;
-  margin-bottom: 10px;
+  margin-bottom: 2rem;
+  text-decoration: underline pink;
 }
 
 .formGroup {
@@ -28,15 +31,19 @@ input[type='password'] {
   outline: none;
 }
 
-button {
-  background-color: #007bff;
+.signUpBtn {
+  background-color: pink;
+  border-radius: 20px;
+  border: 2px solid rgba(240, 248, 255, 0.367);
+  padding: 7px;
+  text-decoration: none;
+  text-align: center;
+  width: 6rem;
+  margin-top: .25rem;
   color: black;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 20px;
-  cursor: pointer;
+  height: min-content;
 }
 
 button:hover {
-  background-color: #0056b3;
+  background-color: rgba(240, 248, 255, 0.367);
 }

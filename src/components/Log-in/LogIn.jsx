@@ -69,7 +69,7 @@ function LogIn() {
             onChange={handlePasswordChange}
           />
         </div>
-        <button type="submit">Submit</button>
+        <button className={styles.logInBtn} type="submit">Submit</button>
       </form>
     </div>
   );
