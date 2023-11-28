@@ -2,11 +2,37 @@ import React, { useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
 import styles from './home.module.css';
 import { Link } from 'react-router-dom';
-
+import { useNavigate } from 'react-router-dom';
 import Messages from '../Messages/Messages';
 
 function Home() {
   const [authToken, setAuthToken] = useState(null);
+  const navigate = useNavigate();
+  const guestUser = async (e) => {
+    e.preventDefault()
+    try {
+      const response = await fetch('http://localhost:3000/log-in', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ username: 'guest-user', password: 'guest%User1' })
+      });
+      const data = await response.json();
+      if (response.ok) {
+        // Store the JWT token in cookies
+        Cookies.set('jwt_token', data.token);
+        Cookies.set('user_id', data.userId);
+        navigate('/guest-user');
+        return;
+      } else {
+        // Handle authentication error
+        console.error('Authentication failed');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  }
 
   useEffect(() => {
     const token = Cookies.get('jwt_token');
@@ -25,9 +51,10 @@ function Home() {
   else {
     return (
       <div className={styles.homeContainer}> 
+      <h1>MiMessage</h1>
         <Link to="/log-in" className={styles.btn}>Log in</Link>
-        <p>or</p>
         <Link to="/sign-up" className={styles.btn}>Sign up</Link>
+        <Link to="/guest-user" className={styles.btn} onClick={guestUser}>Guest user</Link>
       </div>
     );
   }
