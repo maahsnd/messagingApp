@@ -115,8 +115,7 @@ function Thread({ newThreadForm, selectedThread, handleThreadSelect }) {
           {selectedThread.messages.map((message) => (
             <Tooltip
               title={dayjs(message.timestamp).format('MM-DD-YY HH:mm a')}
-              placement='top'
-          
+              placement='left'
             >
               <div className={styles.messageWrap} key={message._id}>
                 {/* show user icon in group convos for recieved messages */}
