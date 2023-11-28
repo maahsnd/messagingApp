@@ -34,15 +34,21 @@
 .sentMsg,
 .receivedMsg {
   padding: 2px;
-  margin: 2px;
+  margin: 8px;
   border: 2px black solid;
+  border-radius: 10px;
+  min-width: 20%;
+  max-width: 60%;
+  width: fit-content;
 }
 .receivedMsg {
   background-color: rgb(227, 224, 224);
+  margin-right: auto
 }
 .sentMsg {
   background-color: rgba(4, 4, 199, 0.73);
-  color: white
+  color: white;
+  margin-left: auto
 }
 .newMsgContainer {
   margin-top: auto;
