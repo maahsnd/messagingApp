@@ -24,7 +24,7 @@ function Home() {
     );
   else {
     return (
-      <div>
+      <div className={styles.homeContainer}> 
         <Link to="/log-in">Log in</Link>
         <p>or</p>
         <Link to="/sign-up">Sign up</Link>
