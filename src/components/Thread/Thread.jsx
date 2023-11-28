@@ -107,21 +107,29 @@ function Thread({ newThreadForm, selectedThread, handleThreadSelect }) {
   };
   return (
     <div className={styles.threadContainer}>
+      
+      
+
       {selectedThread && (
         <div className={styles.thread}>
+          
           {selectedThread.messages.map((message) => (
-            <div
-              className={
-                message.from._id === userId
-                  ? styles.sentMsg
-                  : styles.receivedMsg
-              }
-              key={message._id}
-            >
-              <p>{message.from.username}</p>
-              <p>{message.text}</p>
-              <p>{dayjs(message.timestamp).format('MM-DD-YY HH:mm a')}</p>
-            </div>
+            <div className={styles.messageWrap} key={message._id }>   
+            {/* show user icon in group convos for recieved messages */}
+        {selectedThread.users.length > 2 && message.from._id !== userId && 
+               <div  className={styles.senderIcon}>{message.from.username.slice(0,1)}</div>}
+           <div
+               className={
+                 message.from._id === userId
+                   ? styles.sentMsg
+                   : styles.receivedMsg
+               }
+               key={message._id}
+             >
+              
+               <p className={styles.msgTxt}>{message.text}</p>
+               <p className={styles.msgDate}>{dayjs(message.timestamp).format('MM-DD-YY HH:mm a')}</p>
+             </div></div>
           ))}
         </div>
       )}
