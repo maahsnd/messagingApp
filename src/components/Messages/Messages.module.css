@@ -1,13 +1,18 @@
 .messagesContainer {
   display: flex;
   flex-direction: column;
-
   align-items: flex-start;
-  padding: 20px;
   background-color: black;
-  height: 100vh;
+  height: calc(100% - 1rem);
+  width: calc(100% - 2rem);
+  padding: .5rem 1rem;
   overflow: hidden;
-  width: 90vw;
+  
+}
+.frame {
+  padding: 2rem;
+  width: 100vw;
+  height: 100vh;
 }
 
 .dashBtn {
@@ -24,5 +29,4 @@
 header {
   display: flex;
   justify-content: flex-end;
-  width: 100%;
 }

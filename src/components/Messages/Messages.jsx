@@ -63,7 +63,8 @@ function Messages(props) {
     navigate('/');
   };
   return (
-    <div className={styles.messagesContainer}>
+    <div className={styles.frame}>
+          <div className={styles.messagesContainer}>
       <header>
         <button className={styles.dashBtn}>
           {' '}
@@ -86,6 +87,8 @@ function Messages(props) {
         />
       </div>
     </div>
+    </div>
+
   );
 }
 
