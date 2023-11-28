@@ -68,7 +68,7 @@ function Messages(props) {
       <header>
         <button className={styles.dashBtn}>
           {' '}
-          <Link to={`/${username}/edit`}>{username}</Link>
+          <Link className={styles.dashLink} to={`/${username}/edit`}>Settings</Link>
         </button>
         <button className={styles.dashBtn} onClick={logOut}>
           Log Out
