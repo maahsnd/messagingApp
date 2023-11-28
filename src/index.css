@@ -5,6 +5,7 @@ body {
   justify-content: center;
   align-items: center;
   background-color: rgba(240, 248, 255, 0.367);
+  margin: 0;
 }
 
 * {
