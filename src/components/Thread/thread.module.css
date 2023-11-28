@@ -38,10 +38,11 @@
   border: 2px black solid;
 }
 .receivedMsg {
-  background-color: pink;
+  background-color: rgb(227, 224, 224);
 }
 .sentMsg {
-  background-color: lightblue;
+  background-color: rgba(4, 4, 199, 0.73);
+  color: white
 }
 .newMsgContainer {
   margin-top: auto;
