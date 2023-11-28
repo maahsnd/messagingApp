@@ -3,6 +3,8 @@ import styles from './thread.module.css';
 import Cookies from 'js-cookie';
 import { useParams } from 'react-router-dom';
 import dayjs from 'dayjs';
+import { Tooltip } from '@mui/material';
+import '@emotion/styled';
 
 function Thread({ newThreadForm, selectedThread, handleThreadSelect }) {
   const [recipients, setRecipients] = useState([]);
@@ -105,31 +107,38 @@ function Thread({ newThreadForm, selectedThread, handleThreadSelect }) {
     );
     setRecipients(filtered);
   };
+
   return (
     <div className={styles.threadContainer}>
-      
-      
-
       {selectedThread && (
         <div className={styles.thread}>
-          
           {selectedThread.messages.map((message) => (
-            <div className={styles.messageWrap} key={message._id }>   
-            {/* show user icon in group convos for recieved messages */}
-        {selectedThread.users.length > 2 && message.from._id !== userId && 
-               <div  className={styles.senderIcon}>{message.from.username.slice(0,1)}</div>}
-           <div
-               className={
-                 message.from._id === userId
-                   ? styles.sentMsg
-                   : styles.receivedMsg
-               }
-               key={message._id}
-             >
-              
-               <p className={styles.msgTxt}>{message.text}</p>
-               <p className={styles.msgDate}>{dayjs(message.timestamp).format('MM-DD-YY HH:mm a')}</p>
-             </div></div>
+            <Tooltip
+              title={dayjs(message.timestamp).format('MM-DD-YY HH:mm a')}
+              placement='top'
+          
+            >
+              <div className={styles.messageWrap} key={message._id}>
+                {/* show user icon in group convos for recieved messages */}
+                {selectedThread.users.length > 2 &&
+                  message.from._id !== userId && (
+                    <div className={styles.senderIcon}>
+                      {message.from.username.slice(0, 1)}
+                    </div>
+                  )}
+                <div
+                  className={
+                    message.from._id === userId
+                      ? styles.sentMsg
+                      : styles.receivedMsg
+                  }
+                  key={message._id}
+                  value={message}
+                >
+                  <p className={styles.msgTxt}>{message.text}</p>
+                </div>
+              </div>
+            </Tooltip>
           ))}
         </div>
       )}
