@@ -203,9 +203,7 @@ function Thread({ newThreadForm, selectedThread, handleThreadSelect, setUpdateTh
                 rows="10"
               ></textarea>
             </div>
-            <div className={styles.submitButton}>
-              <button type="submit">Send</button>
-            </div>
+              <button className={styles.submitButton} type="submit">Send</button>
           </form>
         </div>
       )}

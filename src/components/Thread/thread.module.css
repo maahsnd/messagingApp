@@ -7,6 +7,31 @@
   background-color: rgba(240, 248, 255, 0.367);
 }
 
+.threadForm {
+  margin-bottom: auto;
+  width: 100%;
+  background-color: rgba(240, 248, 255, 0.367);
+  border-radius: 5px;
+}
+
+.threadForm > form {
+  margin: 1rem;
+}
+
+.submitButton {
+  background-color:    rgba(4, 4, 199, 0.73);
+  color: white;
+  width: fit-content;
+  height: fit-content;
+  padding: 4px 14px;
+
+}
+
+.submitButton:hover, .newMsgButton:hover {
+  color: pink;
+  border: none;
+}
+
 .placeholder {
   display: flex;
   justify-content: center;
@@ -95,7 +120,7 @@ padding: 10px;
   height: min-content;
   margin-bottom: 25px;
   margin-top: 2px;
-  padding: 4px 6px;
+  padding: 4px 14px;
   width: min-content;
   color: white;
   border: none;
