@@ -79,6 +79,7 @@ function Messages(props) {
           onThreadClick={handleThreadSelect}
           threads={threads}
           handleNewThreadClick={handleNewThreadClick}
+          selectedThread={selectedThread}
         />
         <Thread
           handleThreadSelect={handleThreadSelect}
