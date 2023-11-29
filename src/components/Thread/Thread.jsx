@@ -3,18 +3,20 @@ import styles from './thread.module.css';
 import Cookies from 'js-cookie';
 import { useParams } from 'react-router-dom';
 import dayjs from 'dayjs';
+import { Tooltip } from '@mui/material';
+import '@emotion/styled';
 
-function Thread({ newThreadForm, selectedThread, handleThreadSelect }) {
+function Thread({ newThreadForm, selectedThread, handleThreadSelect, setUpdateThreads }) {
   const [recipients, setRecipients] = useState([]);
   const [message, setMessage] = useState('');
   const [contacts, setContacts] = useState([]);
   const { username } = useParams();
-
+  const userId = Cookies.get('user_id');
   //fetch contacts
   useEffect(() => {
     const fetchContacts = async () => {
       const token = Cookies.get('jwt_token');
-      const response = await fetch(`http://localhost:3000/users/`, {
+      const response = await fetch(`https://messagingapi-production.up.railway.app/users/`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -34,7 +36,7 @@ function Thread({ newThreadForm, selectedThread, handleThreadSelect }) {
   const submitNewThread = async (e) => {
     e.preventDefault();
     const token = Cookies.get('jwt_token');
-    const userId = Cookies.get('user_id');
+
     const recipientIds = recipients.map(
       (recipient) => (recipient = recipient._id)
     );
@@ -44,7 +46,7 @@ function Thread({ newThreadForm, selectedThread, handleThreadSelect }) {
       to: recipientIds
     };
     const response = await fetch(
-      `http://localhost:3000/users/${username}/threads`,
+      `https://messagingapi-production.up.railway.app/users/${username}/threads`,
       {
         method: 'POST',
         headers: {
@@ -58,7 +60,8 @@ function Thread({ newThreadForm, selectedThread, handleThreadSelect }) {
       console.error('Error sending new message');
     }
     const data = await response.json();
-    handleThreadSelect(data);
+    setUpdateThreads(true)
+    setMessage('')
   };
 
   const newMessage = async (e) => {
@@ -72,7 +75,7 @@ function Thread({ newThreadForm, selectedThread, handleThreadSelect }) {
       thread: selectedThread._id
     };
     const response = await fetch(
-      `http://localhost:3000/users/${username}/threads/messages`,
+      `https://messagingapi-production.up.railway.app/users/${username}/threads/messages`,
       {
         method: 'POST',
         headers: {
@@ -86,15 +89,20 @@ function Thread({ newThreadForm, selectedThread, handleThreadSelect }) {
       console.error('Error sending new message');
     }
     const data = await response.json();
-    handleThreadSelect(data);
+    setUpdateThreads(true)
     setMessage('');
+    handleThreadSelect(data);
   };
 
   const selectRecipient = (e) => {
     const selectedRecipient = contacts.find(
       (contact) => contact.username === e.target.value
     );
-    setRecipients([...recipients, selectedRecipient]);
+    if (!recipients.includes(selectedRecipient)) {
+      setRecipients([...recipients, selectedRecipient]);
+    }
+    setTimeout(()=> {e.target.selectedIndex = 0}, 500)
+   
   };
   const messageChange = (e) => {
     setMessage(e.target.value);
@@ -105,16 +113,37 @@ function Thread({ newThreadForm, selectedThread, handleThreadSelect }) {
     );
     setRecipients(filtered);
   };
+
   return (
     <div className={styles.threadContainer}>
       {selectedThread && (
         <div className={styles.thread}>
           {selectedThread.messages.map((message) => (
-            <div className={styles.messages} key={message._id}>
-              <p>{message.from.username}</p>
-              <p>{message.text}</p>
-              <p>{dayjs(message.timestamp).format('MM-DD-YY HH:mm a')}</p>
-            </div>
+            <Tooltip
+              title={dayjs(message.timestamp).format('MM-DD-YY HH:mm a')}
+              placement='left'
+              key={message._id}
+            >
+              <div className={styles.messageWrap} >
+                {/* show user icon in group convos for recieved messages */}
+                {selectedThread.users.length > 2 &&
+                  message.from._id !== userId && (
+                    <div className={styles.senderIcon}>
+                      {message.from.username.slice(0, 1)}
+                    </div>
+                  )}
+                <div
+                  className={
+                    message.from.username === username
+                      ? styles.sentMsg
+                      : styles.receivedMsg
+                  }
+                  value={message}
+                >
+                  <p className={styles.msgTxt}>{message.text}</p>
+                </div>
+              </div>
+            </Tooltip>
           ))}
         </div>
       )}
@@ -139,36 +168,42 @@ function Thread({ newThreadForm, selectedThread, handleThreadSelect }) {
       {/* NEW THREAD*/}
       {newThreadForm && (
         <div className={styles.threadForm}>
+        
           <form onSubmit={submitNewThread}>
+        
             <div className={styles.contactField}>
+            <h4 className={styles.newThreadTitle}>To:</h4>
               <select
+              className={styles.contactSelect}
                 name="contactSelect"
                 id="contactSelect"
-                onChange={selectRecipient}
+                onChange={(e)=> selectRecipient(e)}
               >
-                <option selected disabled value=" ">
+                <option default >
                   Select a recipient
                 </option>
-                {contacts.map((user) => (
+                {contacts.map((user) => (user.username !== username &&
                   <option value={user.username} key={user.username}>
                     {user.username}
                   </option>
                 ))}
               </select>
+              <div className={styles.recipientsContainer}>
+             
+             {recipients.map((recipient) => (
+               <div className={styles.recipient} key={recipient.username}>
+                 <p className={styles.recipientName}>{recipient.username}</p>
+                 <button className={styles.removeRecipient} value={recipient.username} onClick={removeRecipient}>
+                   X
+                 </button>
+               </div>
+             ))}
+           </div>
             </div>
-            <div className={styles.recipientsContainer}>
-              <h4>Recipients:</h4>
-              {recipients.map((recipient) => (
-                <div className={styles.recipient} key={recipient.username}>
-                  <p>{recipient.username}</p>
-                  <button value={recipient.username} onClick={removeRecipient}>
-                    x
-                  </button>
-                </div>
-              ))}
-            </div>
+       
             <div className={styles.messageField}>
               <textarea
+              className={styles.messageText}
                 value={message}
                 onChange={messageChange}
                 name="messageText"
@@ -176,10 +211,9 @@ function Thread({ newThreadForm, selectedThread, handleThreadSelect }) {
                 cols="30"
                 rows="10"
               ></textarea>
+               <button className={styles.submitButton} type="submit">Send</button>
             </div>
-            <div className={styles.submitButton}>
-              <button type="submit">Send</button>
-            </div>
+             
           </form>
         </div>
       )}

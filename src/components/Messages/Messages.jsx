@@ -10,6 +10,7 @@ function Messages(props) {
   const [selectedThread, setSelectedThread] = useState(false);
   const [newThreadForm, setNewThreadForm] = useState(false);
   const [threads, setThreads] = useState([]);
+  const [updateThreads, setUpdateThreads] = useState(false)
   const { username } = useParams();
 
   const navigate = useNavigate();
@@ -19,7 +20,7 @@ function Messages(props) {
         const token = Cookies.get('jwt_token');
         const user_id = Cookies.get('user_id');
         const response = await fetch(
-          `http://localhost:3000/users/${user_id}/threads`,
+          `https://messagingapi-production.up.railway.app/users/${user_id}/threads`,
           {
             method: 'GET',
             headers: {
@@ -32,11 +33,18 @@ function Messages(props) {
           console.error('Error fetching threads');
         }
         const data = await response.json();
+        if (!Array.isArray(data)) {
+          console.error(data.msg);
+        }
         if (response.ok) {
           setThreads(data);
-          setUpdate(null);
+          if (updateThreads) {
+             setSelectedThread(data[0]); 
+             setNewThreadForm(false);
+            }
           return;
         } else {
+          Cookies.remove('jwt_token', { path: '' });
           // Handle authentication error
           console.error('Authentication failed');
         }
@@ -45,10 +53,13 @@ function Messages(props) {
       }
     };
     fetchThreads();
-  }, []);
+    
+    setUpdateThreads(false)
+  }, [updateThreads]);
+
   const handleThreadSelect = (thread) => {
     setSelectedThread(thread);
-    setNewThreadForm(false);
+    newThreadForm && setNewThreadForm(false);
   };
   const handleNewThreadClick = () => {
     setNewThreadForm(true);
@@ -60,11 +71,12 @@ function Messages(props) {
     navigate('/');
   };
   return (
-    <div className={styles.messagesContainer}>
+    <div className={styles.frame}>
+          <div className={styles.messagesContainer}>
       <header>
         <button className={styles.dashBtn}>
           {' '}
-          <Link to={`/${username}/edit`}>{username}</Link>
+          <Link className={styles.dashLink} to={`/${username}/edit`}>Settings</Link>
         </button>
         <button className={styles.dashBtn} onClick={logOut}>
           Log Out
@@ -75,14 +87,19 @@ function Messages(props) {
           onThreadClick={handleThreadSelect}
           threads={threads}
           handleNewThreadClick={handleNewThreadClick}
+          selectedThread={selectedThread}
+          newThreadForm={newThreadForm}
         />
         <Thread
           handleThreadSelect={handleThreadSelect}
           newThreadForm={newThreadForm}
           selectedThread={selectedThread}
+          setUpdateThreads={setUpdateThreads}
         />
       </div>
     </div>
+    </div>
+
   );
 }
 

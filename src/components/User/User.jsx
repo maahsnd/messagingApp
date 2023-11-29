@@ -13,7 +13,7 @@ function User() {
   useEffect(() => {
     const token = Cookies.get('jwt_token');
     async function getUser() {
-      const response = await fetch(`http://localhost:3000/users/${username}`, {
+      const response = await fetch(`https://messagingapi-production.up.railway.app/users/${username}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -39,7 +39,7 @@ function User() {
     const token = Cookies.get('jwt_token');
 
     try {
-      const response = await fetch('http://localhost:3000/users/' + username, {
+      const response = await fetch('https://messagingapi-production.up.railway.app/users/' + username, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

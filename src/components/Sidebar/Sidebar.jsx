@@ -1,23 +1,37 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styles from './sidebar.module.css';
+import { useParams } from 'react-router-dom';
 
-function Sidebar({ handleNewThreadClick, threads, onThreadClick }) {
-  if (!threads) {
-    return <></>;
-  }
+function Sidebar({ handleNewThreadClick, threads, onThreadClick, selectedThread, newThreadForm }) {
+  const {username} = useParams()
   return (
-    <div className={styles.sidebar}>
-      <button className={styles.newThread} onClick={handleNewThreadClick}>
+    <div className={styles.sidebarWrap}>
+       <div className={styles.sidebar}>
+      <button className={newThreadForm ? styles.selected : undefined} onClick={handleNewThreadClick}>
         Create New Thread
       </button>
-      {threads.map((thread) => (
+      {threads.length > 0 && threads.map((thread) => (
         <button
-          className={styles.thread}
-          key={thread.id}
-          onClick={() => onThreadClick(thread)}
+          className={selectedThread._id === thread._id  ? styles.selected : undefined}
+          key={thread._id}
+          onClick={() => {
+            onThreadClick(thread)}}
         >
           {thread.users.map((user, index) => {
-            if (index != 0) {
+            //display ellipse in place of 4th user
+            if (index === 3) {
+              return ' & ...'
+            }
+            //do not display beyond ellipse
+            if (index > 3) {
+              return
+            }
+            //do not display users own name
+            if (user.username === username) {
+              return
+            }
+            //add preceding comma if not users own name or first name
+            if (index != 0 && thread.users[index-1].username != username) {
               return ', ' + user.username;
             }
             return `${user.username}`;
@@ -25,6 +39,8 @@ function Sidebar({ handleNewThreadClick, threads, onThreadClick }) {
         </button>
       ))}
     </div>
+    </div>
+   
   );
 }
 
