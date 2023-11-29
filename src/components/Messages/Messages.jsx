@@ -38,6 +38,10 @@ function Messages(props) {
         }
         if (response.ok) {
           setThreads(data);
+          if (updateThreads) {
+             setSelectedThread(data[0]); 
+             setNewThreadForm(false);
+            }
           return;
         } else {
           Cookies.remove('jwt_token', { path: '' });
@@ -49,8 +53,10 @@ function Messages(props) {
       }
     };
     fetchThreads();
+    
     setUpdateThreads(false)
   }, [updateThreads]);
+
   const handleThreadSelect = (thread) => {
     setSelectedThread(thread);
     newThreadForm && setNewThreadForm(false);

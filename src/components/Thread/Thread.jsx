@@ -60,7 +60,6 @@ function Thread({ newThreadForm, selectedThread, handleThreadSelect, setUpdateTh
       console.error('Error sending new message');
     }
     const data = await response.json();
-    handleThreadSelect(data);
     setUpdateThreads(true)
     setMessage('')
   };
@@ -90,9 +89,9 @@ function Thread({ newThreadForm, selectedThread, handleThreadSelect, setUpdateTh
       console.error('Error sending new message');
     }
     const data = await response.json();
-    handleThreadSelect(data);
     setUpdateThreads(true)
     setMessage('');
+    handleThreadSelect(data);
   };
 
   const selectRecipient = (e) => {
@@ -135,7 +134,7 @@ function Thread({ newThreadForm, selectedThread, handleThreadSelect, setUpdateTh
                   )}
                 <div
                   className={
-                    message.from._id === userId
+                    message.from.username === username
                       ? styles.sentMsg
                       : styles.receivedMsg
                   }
