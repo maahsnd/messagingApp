@@ -167,10 +167,13 @@ function Thread({ newThreadForm, selectedThread, handleThreadSelect, setUpdateTh
       {/* NEW THREAD*/}
       {newThreadForm && (
         <div className={styles.threadForm}>
-           <h4>Recipients:</h4>
+        
           <form onSubmit={submitNewThread}>
+        
             <div className={styles.contactField}>
+            <h4 className={styles.newThreadTitle}>To:</h4>
               <select
+              className={styles.contactSelect}
                 name="contactSelect"
                 id="contactSelect"
                 onChange={(e)=> selectRecipient(e)}
@@ -184,18 +187,19 @@ function Thread({ newThreadForm, selectedThread, handleThreadSelect, setUpdateTh
                   </option>
                 ))}
               </select>
-            </div>
-            <div className={styles.recipientsContainer}>
+              <div className={styles.recipientsContainer}>
              
-              {recipients.map((recipient) => (
-                <div className={styles.recipient} key={recipient.username}>
-                  <p>{recipient.username}</p>
-                  <button value={recipient.username} onClick={removeRecipient}>
-                    x
-                  </button>
-                </div>
-              ))}
+             {recipients.map((recipient) => (
+               <div className={styles.recipient} key={recipient.username}>
+                 <p className={styles.recipientName}>{recipient.username}</p>
+                 <button className={styles.removeRecipient} value={recipient.username} onClick={removeRecipient}>
+                   X
+                 </button>
+               </div>
+             ))}
+           </div>
             </div>
+       
             <div className={styles.messageField}>
               <textarea
                 value={message}

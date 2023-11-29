@@ -14,8 +14,64 @@
   border-radius: 5px;
 }
 
+.newThreadTitle, .contactSelect, .recipientName, .recipient {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+  margin-right: 3px;
+  height: 28.5px;
+}
+
+.contactSelect {
+  border: none;
+  border-radius: 5px;
+  margin-left: 5px;
+}
+
+.newThreadTitle {
+  padding-top: 4px;
+  font-size: 20px;
+  color: rgba(0, 0, 0, 0.6)
+}
+
 .threadForm > form {
   margin: 1rem;
+}
+
+.contactField {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.recipientName {
+  margin-left: 3px;
+  padding-top: 8px;
+}
+
+.recipient {
+  display: flex;
+  background-color:white ;
+  border-radius: 5px;
+  align-items: center;
+  margin-left: 5px;
+}
+ .removeRecipient {
+  margin: 0 3px 0 3px;
+  padding: 4px 6px;
+  height: fit-content;
+  font-size: 10px;
+  width: fit-content;
+  background-color: rgba(128, 128, 128, 0.352);
+color: rgba(0, 0, 0, 0.6);
+border-radius: 50%;
+}
+
+.removeRecipient:hover {
+  color: red;
+  border: red solid 1px;
+  background-color: rgba(128, 128, 128, 0.352);
+
 }
 
 .submitButton {
@@ -40,12 +96,6 @@
   color: black;
 }
 
-.recipient {
-  display: flex;
-  border: rgba(0, 0, 0, 0.475) solid 2px;
-  border-radius: 4px;
-  padding: 2px;
-}
 .threadContainer {
   width: 100%;
   display: flex;
