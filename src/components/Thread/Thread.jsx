@@ -16,7 +16,7 @@ function Thread({ newThreadForm, selectedThread, handleThreadSelect, setUpdateTh
   useEffect(() => {
     const fetchContacts = async () => {
       const token = Cookies.get('jwt_token');
-      const response = await fetch(`http://localhost:3000/users/`, {
+      const response = await fetch(`https://messagingapi-production.up.railway.app/users/`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -46,7 +46,7 @@ function Thread({ newThreadForm, selectedThread, handleThreadSelect, setUpdateTh
       to: recipientIds
     };
     const response = await fetch(
-      `http://localhost:3000/users/${username}/threads`,
+      `https://messagingapi-production.up.railway.app/users/${username}/threads`,
       {
         method: 'POST',
         headers: {
@@ -75,7 +75,7 @@ function Thread({ newThreadForm, selectedThread, handleThreadSelect, setUpdateTh
       thread: selectedThread._id
     };
     const response = await fetch(
-      `http://localhost:3000/users/${username}/threads/messages`,
+      `https://messagingapi-production.up.railway.app/users/${username}/threads/messages`,
       {
         method: 'POST',
         headers: {

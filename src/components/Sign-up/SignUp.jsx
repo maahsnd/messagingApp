@@ -20,7 +20,7 @@ function SignUp() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:3000/sign-up', {
+      const response = await fetch('https://messagingapi-production.up.railway.app/sign-up', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

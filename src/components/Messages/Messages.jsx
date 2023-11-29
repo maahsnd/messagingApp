@@ -20,7 +20,7 @@ function Messages(props) {
         const token = Cookies.get('jwt_token');
         const user_id = Cookies.get('user_id');
         const response = await fetch(
-          `http://localhost:3000/users/${user_id}/threads`,
+          `https://messagingapi-production.up.railway.app/users/${user_id}/threads`,
           {
             method: 'GET',
             headers: {
