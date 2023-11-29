@@ -5,7 +5,8 @@ import { useParams } from 'react-router-dom';
 function Sidebar({ handleNewThreadClick, threads, onThreadClick, selectedThread, newThreadForm }) {
   const {username} = useParams()
   return (
-    <div className={styles.sidebar}>
+    <div className={styles.sidebarWrap}>
+       <div className={styles.sidebar}>
       <button className={newThreadForm ? styles.selected : undefined} onClick={handleNewThreadClick}>
         Create New Thread
       </button>
@@ -38,6 +39,8 @@ function Sidebar({ handleNewThreadClick, threads, onThreadClick, selectedThread,
         </button>
       ))}
     </div>
+    </div>
+   
   );
 }
 
