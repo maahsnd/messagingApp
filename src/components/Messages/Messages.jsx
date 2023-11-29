@@ -51,7 +51,7 @@ function Messages(props) {
   }, []);
   const handleThreadSelect = (thread) => {
     setSelectedThread(thread);
-    setNewThreadForm(false);
+    newThreadForm && setNewThreadForm(false);
   };
   const handleNewThreadClick = () => {
     setNewThreadForm(true);
@@ -80,6 +80,7 @@ function Messages(props) {
           threads={threads}
           handleNewThreadClick={handleNewThreadClick}
           selectedThread={selectedThread}
+          newThreadForm={newThreadForm}
         />
         <Thread
           handleThreadSelect={handleThreadSelect}

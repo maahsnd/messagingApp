@@ -2,11 +2,11 @@ import React, {useState} from 'react';
 import styles from './sidebar.module.css';
 import { useParams } from 'react-router-dom';
 
-function Sidebar({ handleNewThreadClick, threads, onThreadClick, selectedThread }) {
+function Sidebar({ handleNewThreadClick, threads, onThreadClick, selectedThread, newThreadForm }) {
   const {username} = useParams()
   return (
     <div className={styles.sidebar}>
-      <button className={!selectedThread._id ? styles.selected : undefined} onClick={handleNewThreadClick}>
+      <button className={newThreadForm ? styles.selected : undefined} onClick={handleNewThreadClick}>
         Create New Thread
       </button>
       {threads.length > 0 && threads.map((thread) => (
