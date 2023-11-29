@@ -202,6 +202,7 @@ function Thread({ newThreadForm, selectedThread, handleThreadSelect, setUpdateTh
        
             <div className={styles.messageField}>
               <textarea
+              className={styles.messageText}
                 value={message}
                 onChange={messageChange}
                 name="messageText"
@@ -209,8 +210,9 @@ function Thread({ newThreadForm, selectedThread, handleThreadSelect, setUpdateTh
                 cols="30"
                 rows="10"
               ></textarea>
+               <button className={styles.submitButton} type="submit">Send</button>
             </div>
-              <button className={styles.submitButton} type="submit">Send</button>
+             
           </form>
         </div>
       )}
