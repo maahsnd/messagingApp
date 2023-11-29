@@ -100,6 +100,8 @@ function Thread({ newThreadForm, selectedThread, handleThreadSelect, setUpdateTh
       (contact) => contact.username === e.target.value
     );
     setRecipients([...recipients, selectedRecipient]);
+    setTimeout(()=> {e.target.selectedIndex = 0}, 500)
+   
   };
   const messageChange = (e) => {
     setMessage(e.target.value);
@@ -165,12 +167,13 @@ function Thread({ newThreadForm, selectedThread, handleThreadSelect, setUpdateTh
       {/* NEW THREAD*/}
       {newThreadForm && (
         <div className={styles.threadForm}>
+           <h4>Recipients:</h4>
           <form onSubmit={submitNewThread}>
             <div className={styles.contactField}>
               <select
                 name="contactSelect"
                 id="contactSelect"
-                onChange={selectRecipient}
+                onChange={(e)=> selectRecipient(e)}
               >
                 <option default >
                   Select a recipient
@@ -183,7 +186,7 @@ function Thread({ newThreadForm, selectedThread, handleThreadSelect, setUpdateTh
               </select>
             </div>
             <div className={styles.recipientsContainer}>
-              <h4>Recipients:</h4>
+             
               {recipients.map((recipient) => (
                 <div className={styles.recipient} key={recipient.username}>
                   <p>{recipient.username}</p>
