@@ -99,7 +99,9 @@ function Thread({ newThreadForm, selectedThread, handleThreadSelect, setUpdateTh
     const selectedRecipient = contacts.find(
       (contact) => contact.username === e.target.value
     );
-    setRecipients([...recipients, selectedRecipient]);
+    if (!recipients.includes(selectedRecipient)) {
+      setRecipients([...recipients, selectedRecipient]);
+    }
     setTimeout(()=> {e.target.selectedIndex = 0}, 500)
    
   };
