@@ -169,7 +169,7 @@ function Thread({ newThreadForm, selectedThread, handleThreadSelect }) {
                 id="contactSelect"
                 onChange={selectRecipient}
               >
-                <option selected disabled value=" ">
+                <option default >
                   Select a recipient
                 </option>
                 {contacts.map((user) => (
