@@ -61,6 +61,7 @@ function Thread({ newThreadForm, selectedThread, handleThreadSelect }) {
     }
     const data = await response.json();
     handleThreadSelect(data);
+    setMessage('')
   };
 
   const newMessage = async (e) => {
