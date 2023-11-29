@@ -6,7 +6,7 @@ Experience the magic live at: https://84a317bb.messagingapp.pages.dev
 
 API Repo: https://github.com/maahsnd/messagingAPI
 
-![](https://github.com/maahsnd/fakebookFrontEnd/blob/main/src/assets/mimessage_preview.gif)
+![](https://github.com/maahsnd/messagingApp/blob/main/src/assets/mimessage_preview.gif)
 
 # Built with
 
