@@ -6,7 +6,7 @@ import dayjs from 'dayjs';
 import { Tooltip } from '@mui/material';
 import '@emotion/styled';
 
-function Thread({ newThreadForm, selectedThread, handleThreadSelect }) {
+function Thread({ newThreadForm, selectedThread, handleThreadSelect, setUpdateThreads }) {
   const [recipients, setRecipients] = useState([]);
   const [message, setMessage] = useState('');
   const [contacts, setContacts] = useState([]);
@@ -61,6 +61,7 @@ function Thread({ newThreadForm, selectedThread, handleThreadSelect }) {
     }
     const data = await response.json();
     handleThreadSelect(data);
+    setUpdateThreads(true)
     setMessage('')
   };
 
@@ -90,6 +91,7 @@ function Thread({ newThreadForm, selectedThread, handleThreadSelect }) {
     }
     const data = await response.json();
     handleThreadSelect(data);
+    setUpdateThreads(true)
     setMessage('');
   };
 

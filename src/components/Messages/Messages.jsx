@@ -10,6 +10,7 @@ function Messages(props) {
   const [selectedThread, setSelectedThread] = useState(false);
   const [newThreadForm, setNewThreadForm] = useState(false);
   const [threads, setThreads] = useState([]);
+  const [updateThreads, setUpdateThreads] = useState(false)
   const { username } = useParams();
 
   const navigate = useNavigate();
@@ -48,7 +49,8 @@ function Messages(props) {
       }
     };
     fetchThreads();
-  }, []);
+    setUpdateThreads(false)
+  }, [updateThreads]);
   const handleThreadSelect = (thread) => {
     setSelectedThread(thread);
     newThreadForm && setNewThreadForm(false);
@@ -86,6 +88,7 @@ function Messages(props) {
           handleThreadSelect={handleThreadSelect}
           newThreadForm={newThreadForm}
           selectedThread={selectedThread}
+          setUpdateThreads={setUpdateThreads}
         />
       </div>
     </div>
