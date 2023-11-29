@@ -175,7 +175,7 @@ function Thread({ newThreadForm, selectedThread, handleThreadSelect, setUpdateTh
                 <option default >
                   Select a recipient
                 </option>
-                {contacts.map((user) => (
+                {contacts.map((user) => (user.username !== username &&
                   <option value={user.username} key={user.username}>
                     {user.username}
                   </option>
