@@ -26,10 +26,8 @@ button {
   background-color: rgba(240, 248, 255, 0.37);
 }
 
-button:hover {
-  background-color: white;
-}
-
-.selected {
-  background-color: white;
+button:hover, .selected {
+  background-color:    rgba(4, 4, 199, 0.73);
+  color: white;
+  border: 1px black solid;
 }
